@@ -26,6 +26,48 @@ Antes de executar o microsserviço, você precisa configurar o ambiente e o banc
 7. Inicie o microsserviço:
    npm run start
 
+Configuração do .env
+
+Antes de executar o microsserviço, você precisa configurar o arquivo .env com as informações do banco de dados. Siga as etapas abaixo para realizar essa configuração:
+
+1. Na raiz do projeto, crie um arquivo chamado ".env".
+2. Abra o arquivo .env em um editor de texto.
+3. Insira as seguintes variáveis de ambiente no arquivo .env e preencha-as com os valores corretos:
+
+   DB_HOST=              # Endereço do host do banco de dados
+   DB_PORT=              # Porta do banco de dados
+   DB_DATABASE=          # Nome do banco de dados
+   DB_USERNAME=          # Nome de usuário do banco de dados
+   DB_PASSWORD=          # Senha do banco de dados
+
+   Certifique-se de não adicionar espaços antes ou depois dos valores.
+
+Configuração do TypeORM no AppModule
+
+   @Module({
+     imports: [
+       // Outros imports...
+       TypeOrmModule.forRootAsync({
+         inject: [ConfigService],
+         useFactory: async (configService: ConfigService) => ({
+           type: 'mysql',
+           host: configService.get('DB_HOST'),
+           port: configService.get('DB_PORT'),
+           username: configService.get('DB_USERNAME'),
+           password: configService.get('DB_PASSWORD'),
+           database: configService.get('DB_DATABASE'),
+           // Restante da configuração do TypeORM...
+         }),
+       }),
+     ],
+     // Outras configurações...
+   })
+   export class AppModule implements NestModule {
+     configure() {}
+   }
+
+Certifique-se de ter instalado o pacote `@nestjs/config` no projeto:
+
 Agora, o microsserviço estará sendo executado localmente.
 
 Rotas
