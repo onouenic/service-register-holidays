@@ -1,73 +1,98 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Microsserviço de Cadastro de Anos e Feriados
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este repositório contém um microsserviço desenvolvido com o framework Nest.js que permite o cadastro de anos e feriados em um banco de dados MySQL. O microsserviço fornece rotas RESTful para realizar operações CRUD (Create, Read, Update, Delete) nas entidades "Ano" e "Feriado".
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Tecnologias utilizadas
+- Node.js
+- Nest.js
+- TypeScript
+- MySQL
+- TypeORM
 
-## Description
+Configuração
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Antes de executar o microsserviço, você precisa configurar o ambiente e o banco de dados. Siga as etapas abaixo para realizar a configuração necessária:
 
-## Installation
+1. Certifique-se de ter o Node.js e o MySQL instalados em sua máquina.
+2. Clone este repositório:
+   git clone <URL do repositório>
+3. Acesse o diretório do projeto:
+   cd <nome do diretório>
+4. Instale as dependências do projeto:
+   npm install
+5. Configure as informações do banco de dados no arquivo ormconfig.json presente na raiz do projeto.
+6. Execute as migrações do TypeORM para criar as tabelas no banco de dados:
+   npm run typeorm:migrate
+7. Inicie o microsserviço:
+   npm run start
 
-```bash
-$ npm install
-```
+Agora, o microsserviço estará sendo executado localmente.
 
-## Running the app
+Rotas
 
-```bash
-# development
-$ npm run start
+Anos
 
-# watch mode
-$ npm run start:dev
+- GET /anos
+  Obtém todos os anos cadastrados.
 
-# production mode
-$ npm run start:prod
-```
+- GET /anos/:ano
+  Obtém informações de um ano específico com base no ano fornecido.
 
-## Test
+- GET /anos/:id
+  Obtém informações de um ano específico com base no ID fornecido.
 
-```bash
-# unit tests
-$ npm run test
+- POST /anos
+  Cria um novo ano. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o valor do ano a ser cadastrado. Exemplo de corpo da requisição:
 
-# e2e tests
-$ npm run test:e2e
+  {
+    "ano": 2023
+  }
 
-# test coverage
-$ npm run test:cov
-```
+- PUT /anos/:id
+  Atualiza as informações de um ano específico com base no ID fornecido. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o novo valor do ano a ser atualizado. Exemplo de corpo da requisição:
 
-## Support
+  {
+    "ano": 2024
+  }
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- DELETE /anos/:id
+  Exclui um ano específico com base no ID fornecido.
 
-## Stay in touch
+Feriados
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- GET /feriados
+  Obtém todos os feriados cadastrados.
 
-## License
+- GET /feriados/:id
+  Obtém informações de um feriado específico com base no ID fornecido.
 
-Nest is [MIT licensed](LICENSE).
+- POST /feriados
+  Cria um novo feriado. O corpo da requisição deve conter um objeto JSON com as propriedades "nome", "data", "tipo" e "anoId" contendo as informações do feriado a ser cadastrado. O valor da propriedade "anoId" deve ser uma string gerada por UUID(). Exemplo de corpo da requisição:
+
+  {
+    "nome": "Natal",
+    "data": "2023-12-25",
+    "tipo": "Nacional",
+    "anoId": "b7a663a0-78d1-4f70-9823-83d6a3eab8f1"
+  }
+
+- PUT /feriados/:id
+  Atualiza as informações de um feriado específico com base no ID fornecido. O corpo da requisição deve conter um objeto JSON com as propriedades a serem atualizadas. Exemplo de corpo da requisição:
+
+  {
+    "nome": "Ano Novo",
+    "data": "2023-01-01",
+    "tipo": "Nacional",
+    "anoId": "b7a663a0-78d1-4f70-9823-83d6a3eab8f1"
+  }
+
+- DELETE /feriados/:id
+  Exclui um feriado específico com base no ID fornecido.
+
+Contribuição
+
+Se você deseja contribuir com este projeto, sinta-se à vontade para enviar pull requests com suas melhorias. Ficaremos felizes em revisar e mesclar suas alterações.
+
+Licença
+
+Este projeto está licenciado sob a Licença MIT.
