@@ -15,14 +15,10 @@ Antes de executar o microsserviço, você precisa configurar o ambiente e o banc
 
 1. Certifique-se de ter o Node.js e o MySQL instalados em sua máquina.
 2. Clone este repositório:
-   git clone <URL do repositório>
-3. Acesse o diretório do projeto:
-   cd <nome do diretório>
-4. Instale as dependências do projeto:
+   git clone <git@github.com:onouenic/service-register-holidays.git>
+3. Instale as dependências do projeto:
    npm install
-5. Configure as informações do banco de dados no arquivo ormconfig.json presente na raiz do projeto.
-6. Execute as migrações do TypeORM para criar as tabelas no banco de dados:
-   npm run typeorm:migrate
+4. Configure as variáveis de ambientes
 7. Inicie o microsserviço:
    npm run start
 
@@ -66,8 +62,6 @@ Configuração do TypeORM no AppModule
      configure() {}
    }
 
-Certifique-se de ter instalado o pacote `@nestjs/config` no projeto:
-
 Agora, o microsserviço estará sendo executado localmente.
 
 Rotas
@@ -78,7 +72,7 @@ Anos
   Obtém todos os anos cadastrados.
 
 - GET /anos/:ano
-  Obtém informações de um ano específico com base no ano fornecido.
+  Obtém informações de um ano específico com base no ano fornecido e caso o ano não exista no banco, ele cria o ano e sesu feriados.
 
 - GET /anos/:id
   Obtém informações de um ano específico com base no ID fornecido.
