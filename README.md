@@ -17,7 +17,7 @@ Antes de executar o microsserviço, você precisa configurar o ambiente e o banc
 1. Certifique-se de ter o Node.js e o MySQL instalados em sua máquina.
 2. Clone este repositório:
    ```
-   git clone <git@github.com:onouenic/service-register-holidays.git>
+   git clone git@github.com:onouenic/service-register-holidays.git
    ```
 3. Instale as dependências do projeto:
    ```
