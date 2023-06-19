@@ -16,15 +16,20 @@ Antes de executar o microsserviço, você precisa configurar o ambiente e o banc
 
 1. Certifique-se de ter o Node.js e o MySQL instalados em sua máquina.
 2. Clone este repositório:
+
    ```
    git clone git@github.com:onouenic/service-register-holidays.git
    ```
-3. Instale as dependências do projeto:
+   
+4. Instale as dependências do projeto:
+   
    ```
    npm install
    ```
-4. Configure as variáveis de ambientes.
+   
+6. Configure as variáveis de ambientes.
 7. Inicie o microsserviço:
+   
    ```
    npm run start
    ```
@@ -89,9 +94,7 @@ Agora, o microsserviço estará sendo executado localmente.
   Obtém informações de um ano específico com base no ID fornecido.
 
 - POST `/anos`
-  Cria um novo ano. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o valor do ano a ser cadastrado. Exemplo de corpo da requisi
-
-ção:
+  Cria um novo ano. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o valor do ano a ser cadastrado. Exemplo de corpo da requisição:
 
   ```json
   {
@@ -100,7 +103,8 @@ Agora, o microsserviço estará sendo executado localmente.
   ```
 
 - PUT `/anos/:id`
-  Atualiza as informações de um ano específico com base no ID fornecido. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o novo valor do ano a ser atualizado. Exemplo de corpo da requisição:
+  Atualiza as informações de um ano específico com base no ID fornecido. O corpo da requisição deve conter um objeto JSON com a propriedade "ano" contendo o novo valor do ano a ser atualizado.
+  Exemplo de corpo da requisição:
 
   ```json
   {
