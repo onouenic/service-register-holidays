@@ -20,7 +20,13 @@ export class FeriadosService {
     return await this.feriadosRepository.findOneByDate(data);
   }
 
-  async create(feriado: CreateFeriadoDto): Promise<IFeriadosEntity> {
+  async create(
+    feriado: CreateFeriadoDto,
+  ): Promise<IFeriadosEntity | { message: string }> {
+    const existsFeriado = await this.feriadosRepository.findOneByDate(
+      feriado.data,
+    );
+    if (existsFeriado) return { message: 'Feriado ja existe!' };
     return await this.feriadosRepository.create(feriado);
   }
 
